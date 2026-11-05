@@ -1,0 +1,2911 @@
+{
+    "info": {
+        "_postman_id": "d8d8fb6e-2b1e-4b7d-9cbe-6f17cb3bce61",
+        "name": "Syrian Adv Landing API",
+        "description": "Postman collection for Syrian Adv Landing APIs, split into Customer and Admin flows.",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Customer",
+            "item": [
+                {
+                    "name": "Auth",
+                    "item": [
+                        {
+                            "name": "Customer Login",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{baseUrl}}/api/auth/login",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "auth",
+                                        "login"
+                                    ]
+                                },
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"email\": \"customer@example.com\",\n  \"password\": \"password123\"\n}"
+                                },
+                                "description": "Customer login. Returns access_token with account_type=customer."
+                            },
+                            "response": [
+                                {
+                                    "name": "Success Example",
+                                    "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                            {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{baseUrl}}/api/auth/login",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "api",
+                                                "auth",
+                                                "login"
+                                            ]
+                                        },
+                                        "body": {
+                                            "mode": "raw",
+                                            "raw": "{\n  \"email\": \"customer@example.com\",\n  \"password\": \"password123\"\n}"
+                                        }
+                                    },
+                                    "status": "OK",
+                                    "code": 200,
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "body": "{\n  \"user\": {\n    \"id\": \"12\",\n    \"full_name\": \"Customer Name\",\n    \"email\": \"customer@example.com\",\n    \"account_type\": \"customer\"\n  },\n  \"access_token\": \"eyJhbGciOi...\"\n}"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Customer Register",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{baseUrl}}/api/auth/register",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "auth",
+                                        "register"
+                                    ]
+                                },
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"full_name\": \"Customer Name\",\n  \"company_name\": \"Customer Company\",\n  \"phone_number\": \"+963900000000\",\n  \"address\": \"Damascus\",\n  \"work_type_id\": 1,\n  \"email\": \"customer@example.com\",\n  \"password\": \"password123\"\n}"
+                                },
+                                "description": "Customer registration. Creates a customer account."
+                            },
+                            "response": [
+                                {
+                                    "name": "Success Example",
+                                    "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                            {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{baseUrl}}/api/auth/register",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "api",
+                                                "auth",
+                                                "register"
+                                            ]
+                                        },
+                                        "body": {
+                                            "mode": "raw",
+                                            "raw": "{\n  \"full_name\": \"Customer Name\",\n  \"company_name\": \"Customer Company\",\n  \"phone_number\": \"+963900000000\",\n  \"address\": \"Damascus\",\n  \"work_type_id\": 1,\n  \"email\": \"customer@example.com\",\n  \"password\": \"password123\"\n}"
+                                        }
+                                    },
+                                    "status": "Created",
+                                    "code": 201,
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "body": "{\n  \"id\": \"12\",\n  \"full_name\": \"Customer Name\",\n  \"company_name\": \"Customer Company\",\n  \"phone_number\": \"+963900000000\",\n  \"email\": \"customer@example.com\"\n}"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "Reference Data",
+                    "item": [
+                        {
+                            "name": "Get Cities",
+                            "request": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{baseUrl}}/api/city",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "city"
+                                    ]
+                                },
+                                "description": "Returns the available cities."
+                            },
+                            "response": [
+                                {
+                                    "name": "Success Example",
+                                    "originalRequest": {
+                                        "method": "GET",
+                                        "url": {
+                                            "raw": "{{baseUrl}}/api/city",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "api",
+                                                "city"
+                                            ]
+                                        }
+                                    },
+                                    "status": "OK",
+                                    "code": 200,
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "body": "[\n  {\n    \"id\": \"1\",\n    \"name\": \"Damascus\"\n  }\n]"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Get Regions",
+                            "request": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{baseUrl}}/api/region",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "region"
+                                    ]
+                                },
+                                "description": "Returns the available regions."
+                            },
+                            "response": [
+                                {
+                                    "name": "Success Example",
+                                    "originalRequest": {
+                                        "method": "GET",
+                                        "url": {
+                                            "raw": "{{baseUrl}}/api/region",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "api",
+                                                "region"
+                                            ]
+                                        }
+                                    },
+                                    "status": "OK",
+                                    "code": 200,
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "body": "[\n  {\n    \"id\": \"11\",\n    \"name\": \"Mazza\",\n    \"city_id\": \"1\"\n  }\n]"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "Catalog",
+                    "item": [
+                        {
+                            "name": "Get Templates",
+                            "request": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{baseUrl}}/api/template",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "template"
+                                    ]
+                                },
+                                "description": "Returns templates with base prices and landing price if configured."
+                            },
+                            "response": [
+                                {
+                                    "name": "Success Example",
+                                    "originalRequest": {
+                                        "method": "GET",
+                                        "url": {
+                                            "raw": "{{baseUrl}}/api/template",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "api",
+                                                "template"
+                                            ]
+                                        }
+                                    },
+                                    "status": "OK",
+                                    "code": 200,
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "body": "[\n  {\n    \"id\": \"5\",\n    \"model\": \"Standard\",\n    \"type\": \"Billboard\",\n    \"price\": 1200,\n    \"landing_price\": 1000,\n    \"base_prices\": [\n      {\n        \"type\": 1,\n        \"price\": 1200\n      }\n    ]\n  }\n]"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Get Printings",
+                            "request": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{baseUrl}}/api/printings",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "printings"
+                                    ]
+                                },
+                                "description": "Returns the available printing types. No token is required."
+                            },
+                            "response": [
+                                {
+                                    "name": "Success Example",
+                                    "originalRequest": {
+                                        "method": "GET",
+                                        "url": {
+                                            "raw": "{{baseUrl}}/api/printings",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "api",
+                                                "printings"
+                                            ]
+                                        }
+                                    },
+                                    "status": "OK",
+                                    "code": 200,
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "body": "[\n  {\n    \"id\": \"1\",\n    \"type\": \"Glossy\",\n    \"price\": 250\n  },\n  {\n    \"id\": \"2\",\n    \"type\": \"Matte\",\n    \"price\": 300\n  }\n]"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Get Page Contents Public",
+                            "request": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{baseUrl}}/api/page-contents/public?locale=ar",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "page-contents",
+                                        "public"
+                                    ],
+                                    "query": [
+                                        {
+                                            "key": "locale",
+                                            "value": "ar"
+                                        }
+                                    ]
+                                },
+                                "description": "Returns active landing page texts grouped by section. No token is required."
+                            },
+                            "response": [
+                                {
+                                    "name": "Success Example",
+                                    "originalRequest": {
+                                        "method": "GET",
+                                        "url": {
+                                            "raw": "{{baseUrl}}/api/page-contents/public?locale=ar",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "api",
+                                                "page-contents",
+                                                "public"
+                                            ]
+                                        }
+                                    },
+                                    "status": "OK",
+                                    "code": 200,
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "body": "{\n  \"hero\": {\n    \"title\": \"أفضل لوحات الإعلان في سوريا\",\n    \"subtitle\": \"نصل بعلامتك التجارية إلى الجمهور المناسب\"\n  },\n  \"about\": {\n    \"description\": \"منصة ذكية لإدارة الحجز والإعلانات\"\n  }\n}"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Get Road Signs",
+                            "request": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{baseUrl}}/api/roadsign?start_date=2026-05-01&end_date=2026-05-15&city_id=1&region_id=11&template_id=5",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "roadsign"
+                                    ],
+                                    "query": [
+                                        {
+                                            "key": "start_date",
+                                            "value": "2026-05-01"
+                                        },
+                                        {
+                                            "key": "end_date",
+                                            "value": "2026-05-15"
+                                        },
+                                        {
+                                            "key": "city_id",
+                                            "value": "1"
+                                        },
+                                        {
+                                            "key": "region_id",
+                                            "value": "11"
+                                        },
+                                        {
+                                            "key": "template_id",
+                                            "value": "5"
+                                        }
+                                    ]
+                                },
+                                "description": "Returns road signs from the upstream service using the provided filters."
+                            },
+                            "response": [
+                                {
+                                    "name": "Success Example",
+                                    "originalRequest": {
+                                        "method": "GET",
+                                        "url": {
+                                            "raw": "{{baseUrl}}/api/roadsign?start_date=2026-05-01&end_date=2026-05-15&city_id=1&region_id=11&template_id=5",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "api",
+                                                "roadsign"
+                                            ]
+                                        }
+                                    },
+                                    "status": "OK",
+                                    "code": 200,
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "body": "{\n  \"data\": [\n    {\n      \"id\": 1001,\n      \"roadsign_code\": \"RS-1001\",\n      \"template_id\": 5\n    }\n  ]\n}"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "محتوى الواجهة",
+                            "item": [
+                                {
+                                    "name": "List Page Contents",
+                                    "request": {
+                                        "method": "GET",
+                                        "header": [
+                                            {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{adminToken}}"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{baseUrl}}/api/page-contents/admin?locale=ar",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "api",
+                                                "page-contents",
+                                                "admin"
+                                            ],
+                                            "query": [
+                                                {
+                                                    "key": "locale",
+                                                    "value": "ar"
+                                                }
+                                            ]
+                                        },
+                                        "description": "Lists all landing page content rows for admin or superadmin management."
+                                    },
+                                    "response": [
+                                        {
+                                            "name": "Success Example",
+                                            "originalRequest": {
+                                                "method": "GET",
+                                                "header": [
+                                                    {
+                                                        "key": "Authorization",
+                                                        "value": "Bearer {{adminToken}}"
+                                                    }
+                                                ],
+                                                "url": {
+                                                    "raw": "{{baseUrl}}/api/page-contents/admin?locale=ar",
+                                                    "host": [
+                                                        "{{baseUrl}}"
+                                                    ],
+                                                    "path": [
+                                                        "api",
+                                                        "page-contents",
+                                                        "admin"
+                                                    ]
+                                                }
+                                            },
+                                            "status": "OK",
+                                            "code": 200,
+                                            "header": [
+                                                {
+                                                    "key": "Content-Type",
+                                                    "value": "application/json"
+                                                }
+                                            ],
+                                            "body": "[\n  {\n    \"id\": 1,\n    \"section\": \"hero\",\n    \"key\": \"title\",\n    \"value\": \"أفضل لوحات الإعلان في سوريا\",\n    \"locale\": \"ar\",\n    \"is_active\": true\n  }\n]"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Create Page Content",
+                                    "request": {
+                                        "method": "POST",
+                                        "header": [
+                                            {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{adminToken}}"
+                                            },
+                                            {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{baseUrl}}/api/page-contents/admin",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "api",
+                                                "page-contents",
+                                                "admin"
+                                            ]
+                                        },
+                                        "body": {
+                                            "mode": "raw",
+                                            "raw": "{\n  \"section\": \"hero\",\n  \"key\": \"title\",\n  \"value\": \"أفضل لوحات الإعلان في سوريا\",\n  \"locale\": \"ar\",\n  \"is_active\": true\n}"
+                                        },
+                                        "description": "Creates a page content row that can later be activated or deactivated."
+                                    },
+                                    "response": [
+                                        {
+                                            "name": "Created Example",
+                                            "originalRequest": {
+                                                "method": "POST",
+                                                "header": [
+                                                    {
+                                                        "key": "Authorization",
+                                                        "value": "Bearer {{adminToken}}"
+                                                    },
+                                                    {
+                                                        "key": "Content-Type",
+                                                        "value": "application/json"
+                                                    }
+                                                ],
+                                                "url": {
+                                                    "raw": "{{baseUrl}}/api/page-contents/admin",
+                                                    "host": [
+                                                        "{{baseUrl}}"
+                                                    ],
+                                                    "path": [
+                                                        "api",
+                                                        "page-contents",
+                                                        "admin"
+                                                    ]
+                                                }
+                                            },
+                                            "status": "Created",
+                                            "code": 201,
+                                            "header": [
+                                                {
+                                                    "key": "Content-Type",
+                                                    "value": "application/json"
+                                                }
+                                            ],
+                                            "body": "{\n  \"id\": 1,\n  \"section\": \"hero\",\n  \"key\": \"title\",\n  \"value\": \"أفضل لوحات الإعلان في سوريا\",\n  \"locale\": \"ar\",\n  \"is_active\": true\n}"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Update Page Content",
+                                    "request": {
+                                        "method": "PATCH",
+                                        "header": [
+                                            {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{adminToken}}"
+                                            },
+                                            {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{baseUrl}}/api/page-contents/admin/1",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "api",
+                                                "page-contents",
+                                                "admin",
+                                                "1"
+                                            ]
+                                        },
+                                        "body": {
+                                            "mode": "raw",
+                                            "raw": "{\n  \"value\": \"نص محدث للعنوان الرئيسي\"\n}"
+                                        },
+                                        "description": "Updates the text value, section, key, locale, or active state."
+                                    },
+                                    "response": [
+                                        {
+                                            "name": "Success Example",
+                                            "originalRequest": {
+                                                "method": "PATCH",
+                                                "header": [
+                                                    {
+                                                        "key": "Authorization",
+                                                        "value": "Bearer {{adminToken}}"
+                                                    },
+                                                    {
+                                                        "key": "Content-Type",
+                                                        "value": "application/json"
+                                                    }
+                                                ],
+                                                "url": {
+                                                    "raw": "{{baseUrl}}/api/page-contents/admin/1",
+                                                    "host": [
+                                                        "{{baseUrl}}"
+                                                    ],
+                                                    "path": [
+                                                        "api",
+                                                        "page-contents",
+                                                        "admin",
+                                                        "1"
+                                                    ]
+                                                }
+                                            },
+                                            "status": "OK",
+                                            "code": 200,
+                                            "header": [
+                                                {
+                                                    "key": "Content-Type",
+                                                    "value": "application/json"
+                                                }
+                                            ],
+                                            "body": "{\n  \"id\": 1,\n  \"section\": \"hero\",\n  \"key\": \"title\",\n  \"value\": \"نص محدث للعنوان الرئيسي\",\n  \"locale\": \"ar\",\n  \"is_active\": true\n}"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Activate Page Content",
+                                    "request": {
+                                        "method": "PATCH",
+                                        "header": [
+                                            {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{adminToken}}"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{baseUrl}}/api/page-contents/admin/1/activate",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "api",
+                                                "page-contents",
+                                                "admin",
+                                                "1",
+                                                "activate"
+                                            ]
+                                        },
+                                        "description": "Marks a page content row as active so it appears on the public landing page."
+                                    },
+                                    "response": [
+                                        {
+                                            "name": "Success Example",
+                                            "originalRequest": {
+                                                "method": "PATCH",
+                                                "header": [
+                                                    {
+                                                        "key": "Authorization",
+                                                        "value": "Bearer {{adminToken}}"
+                                                    }
+                                                ],
+                                                "url": {
+                                                    "raw": "{{baseUrl}}/api/page-contents/admin/1/activate",
+                                                    "host": [
+                                                        "{{baseUrl}}"
+                                                    ],
+                                                    "path": [
+                                                        "api",
+                                                        "page-contents",
+                                                        "admin",
+                                                        "1",
+                                                        "activate"
+                                                    ]
+                                                }
+                                            },
+                                            "status": "OK",
+                                            "code": 200,
+                                            "header": [
+                                                {
+                                                    "key": "Content-Type",
+                                                    "value": "application/json"
+                                                }
+                                            ],
+                                            "body": "{\n  \"id\": 1,\n  \"section\": \"hero\",\n  \"key\": \"title\",\n  \"value\": \"أفضل لوحات الإعلان في سوريا\",\n  \"locale\": \"ar\",\n  \"is_active\": true\n}"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Deactivate Page Content",
+                                    "request": {
+                                        "method": "PATCH",
+                                        "header": [
+                                            {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{adminToken}}"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{baseUrl}}/api/page-contents/admin/1/deactivate",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "api",
+                                                "page-contents",
+                                                "admin",
+                                                "1",
+                                                "deactivate"
+                                            ]
+                                        },
+                                        "description": "Marks a page content row as inactive so it is hidden from the public landing page."
+                                    },
+                                    "response": [
+                                        {
+                                            "name": "Success Example",
+                                            "originalRequest": {
+                                                "method": "PATCH",
+                                                "header": [
+                                                    {
+                                                        "key": "Authorization",
+                                                        "value": "Bearer {{adminToken}}"
+                                                    }
+                                                ],
+                                                "url": {
+                                                    "raw": "{{baseUrl}}/api/page-contents/admin/1/deactivate",
+                                                    "host": [
+                                                        "{{baseUrl}}"
+                                                    ],
+                                                    "path": [
+                                                        "api",
+                                                        "page-contents",
+                                                        "admin",
+                                                        "1",
+                                                        "deactivate"
+                                                    ]
+                                                }
+                                            },
+                                            "status": "OK",
+                                            "code": 200,
+                                            "header": [
+                                                {
+                                                    "key": "Content-Type",
+                                                    "value": "application/json"
+                                                }
+                                            ],
+                                            "body": "{\n  \"id\": 1,\n  \"section\": \"hero\",\n  \"key\": \"title\",\n  \"value\": \"أفضل لوحات الإعلان في سوريا\",\n  \"locale\": \"ar\",\n  \"is_active\": false\n}"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Delete Page Content",
+                                    "request": {
+                                        "method": "DELETE",
+                                        "header": [
+                                            {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{adminToken}}"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{baseUrl}}/api/page-contents/admin/1",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "api",
+                                                "page-contents",
+                                                "admin",
+                                                "1"
+                                            ]
+                                        },
+                                        "description": "Deletes a page content row from the landing content table."
+                                    },
+                                    "response": [
+                                        {
+                                            "name": "Success Example",
+                                            "originalRequest": {
+                                                "method": "DELETE",
+                                                "header": [
+                                                    {
+                                                        "key": "Authorization",
+                                                        "value": "Bearer {{adminToken}}"
+                                                    }
+                                                ],
+                                                "url": {
+                                                    "raw": "{{baseUrl}}/api/page-contents/admin/1",
+                                                    "host": [
+                                                        "{{baseUrl}}"
+                                                    ],
+                                                    "path": [
+                                                        "api",
+                                                        "page-contents",
+                                                        "admin",
+                                                        "1"
+                                                    ]
+                                                }
+                                            },
+                                            "status": "OK",
+                                            "code": 200,
+                                            "header": [
+                                                {
+                                                    "key": "Content-Type",
+                                                    "value": "application/json"
+                                                }
+                                            ],
+                                            "body": "{\n  \"success\": true\n}"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "Bookings",
+                    "item": [
+                        {
+                            "name": "Get My Bookings",
+                            "request": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{customerToken}}"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{baseUrl}}/api/booking?start_date=2026-05-01&end_date=2026-05-31&roadsign_id=1001",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "booking"
+                                    ],
+                                    "query": [
+                                        {
+                                            "key": "start_date",
+                                            "value": "2026-05-01"
+                                        },
+                                        {
+                                            "key": "end_date",
+                                            "value": "2026-05-31"
+                                        },
+                                        {
+                                            "key": "roadsign_id",
+                                            "value": "1001"
+                                        }
+                                    ]
+                                },
+                                "description": "Returns the authenticated customer's bookings."
+                            },
+                            "response": [
+                                {
+                                    "name": "Success Example",
+                                    "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                            {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{customerToken}}"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{baseUrl}}/api/booking?start_date=2026-05-01&end_date=2026-05-31&roadsign_id=1001",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "api",
+                                                "booking"
+                                            ]
+                                        }
+                                    },
+                                    "status": "OK",
+                                    "code": 200,
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "body": "[\n  {\n    \"id\": \"50\",\n    \"type\": 1,\n    \"status\": 1,\n    \"start_date\": \"2026-05-01\",\n    \"end_date\": \"2026-05-31\",\n    \"roadsigns\": []\n  }\n]"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Create Booking",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{customerToken}}"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{baseUrl}}/api/booking",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "booking"
+                                    ]
+                                },
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"start_date\": \"2026-05-01\",\n  \"end_date\": \"2026-05-31\",\n  \"notes\": \"Landing campaign booking\",\n  \"product_type\": 1,\n  \"printing_id\": 2,\n  \"roadsigns\": [\n    {\n      \"road_sign_id\": 1001,\n      \"booking_faces\": 2,\n      \"number_of_reserved_panels\": 1,\n      \"start_date\": \"2026-05-01\",\n      \"end_date\": \"2026-05-31\"\n    }\n  ]\n}"
+                                },
+                                "description": "Creates a booking for the authenticated customer."
+                            },
+                            "response": [
+                                {
+                                    "name": "Created Example",
+                                    "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                            {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{customerToken}}"
+                                            },
+                                            {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{baseUrl}}/api/booking",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "api",
+                                                "booking"
+                                            ]
+                                        },
+                                        "body": {
+                                            "mode": "raw",
+                                            "raw": "{\n  \"start_date\": \"2026-05-01\",\n  \"end_date\": \"2026-05-31\",\n  \"notes\": \"Landing campaign booking\",\n  \"product_type\": 1,\n  \"printing_id\": 2,\n  \"roadsigns\": [\n    {\n      \"road_sign_id\": 1001,\n      \"booking_faces\": 2,\n      \"number_of_reserved_panels\": 1,\n      \"start_date\": \"2026-05-01\",\n      \"end_date\": \"2026-05-31\"\n    }\n  ]\n}"
+                                        }
+                                    },
+                                    "status": "Created",
+                                    "code": 201,
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "body": "{\n  \"id\": \"50\",\n  \"customer_id\": \"12\",\n  \"total_price\": 3200,\n  \"total_advertising_space\": 24,\n  \"total_printing_space\": 8\n}"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "Chat",
+                    "item": [
+                        {
+                            "name": "List My Conversations",
+                            "request": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{customerToken}}"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{baseUrl}}/api/chat/conversations?page=1&limit=20",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "chat",
+                                        "conversations"
+                                    ],
+                                    "query": [
+                                        {
+                                            "key": "page",
+                                            "value": "1"
+                                        },
+                                        {
+                                            "key": "limit",
+                                            "value": "20"
+                                        }
+                                    ]
+                                },
+                                "description": "Returns the authenticated customer's conversations. Use status=open or status=closed if needed."
+                            },
+                            "response": [
+                                {
+                                    "name": "Success Example",
+                                    "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                            {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{customerToken}}"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{baseUrl}}/api/chat/conversations?page=1&limit=20",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "api",
+                                                "chat",
+                                                "conversations"
+                                            ]
+                                        }
+                                    },
+                                    "status": "OK",
+                                    "code": 200,
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "body": "[\n  {\n    \"id\": \"15\",\n    \"customer_id\": \"12\",\n    \"status\": \"open\",\n    \"latest_message\": {\n      \"id\": \"44\",\n      \"content\": \"Hello\"\n    }\n  }\n]"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Create My Conversation",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{customerToken}}"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{baseUrl}}/api/chat/conversations",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "chat",
+                                        "conversations"
+                                    ]
+                                },
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{}"
+                                },
+                                "description": "Creates or reuses the customer's open conversation. Body is optional for customers."
+                            },
+                            "response": [
+                                {
+                                    "name": "Created Example",
+                                    "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                            {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{customerToken}}"
+                                            },
+                                            {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{baseUrl}}/api/chat/conversations",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "api",
+                                                "chat",
+                                                "conversations"
+                                            ]
+                                        }
+                                    },
+                                    "status": "Created",
+                                    "code": 201,
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "body": "{\n  \"id\": \"15\",\n  \"customer_id\": \"12\",\n  \"status\": \"open\"\n}"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "List Messages",
+                            "request": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{customerToken}}"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{baseUrl}}/api/chat/conversations/15/messages?page=1&limit=50",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "chat",
+                                        "conversations",
+                                        "15",
+                                        "messages"
+                                    ],
+                                    "query": [
+                                        {
+                                            "key": "page",
+                                            "value": "1"
+                                        },
+                                        {
+                                            "key": "limit",
+                                            "value": "50"
+                                        }
+                                    ]
+                                },
+                                "description": "Returns messages for a conversation that belongs to the authenticated customer."
+                            },
+                            "response": [
+                                {
+                                    "name": "Success Example",
+                                    "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                            {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{customerToken}}"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{baseUrl}}/api/chat/conversations/15/messages?page=1&limit=50",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "api",
+                                                "chat",
+                                                "conversations",
+                                                "15",
+                                                "messages"
+                                            ]
+                                        }
+                                    },
+                                    "status": "OK",
+                                    "code": 200,
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "body": "{\n  \"conversation\": {\n    \"id\": \"15\",\n    \"status\": \"open\"\n  },\n  \"items\": [\n    {\n      \"id\": \"44\",\n      \"content\": \"Hello\"\n    }\n  ],\n  \"pagination\": {\n    \"page\": 1,\n    \"limit\": 50\n  }\n}"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Send Message",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{customerToken}}"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{baseUrl}}/api/chat/conversations/15/messages",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "chat",
+                                        "conversations",
+                                        "15",
+                                        "messages"
+                                    ]
+                                },
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"content\": \"مرحبا، أريد متابعة الطلب\"\n}"
+                                },
+                                "description": "Sends a new message in the conversation."
+                            },
+                            "response": [
+                                {
+                                    "name": "Created Example",
+                                    "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                            {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{customerToken}}"
+                                            },
+                                            {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{baseUrl}}/api/chat/conversations/15/messages",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "api",
+                                                "chat",
+                                                "conversations",
+                                                "15",
+                                                "messages"
+                                            ]
+                                        }
+                                    },
+                                    "status": "Created",
+                                    "code": 201,
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "body": "{\n  \"conversation\": {\n    \"id\": \"15\",\n    \"status\": \"open\"\n  },\n  \"message\": {\n    \"id\": \"45\",\n    \"content\": \"مرحبا، أريد متابعة الطلب\"\n  }\n}"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Admin",
+            "item": [
+                {
+                    "name": "Auth",
+                    "item": [
+                        {
+                            "name": "Admin Login",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{baseUrl}}/api/auth/login",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "auth",
+                                        "login"
+                                    ]
+                                },
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"email\": \"admin@example.com\",\n  \"password\": \"admin123456\"\n}"
+                                },
+                                "description": "Admin login. Returns access_token with account_type=admin when the user has an admin role."
+                            },
+                            "response": [
+                                {
+                                    "name": "Success Example",
+                                    "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                            {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{baseUrl}}/api/auth/login",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "api",
+                                                "auth",
+                                                "login"
+                                            ]
+                                        },
+                                        "body": {
+                                            "mode": "raw",
+                                            "raw": "{\n  \"email\": \"admin@example.com\",\n  \"password\": \"admin123456\"\n}"
+                                        }
+                                    },
+                                    "status": "OK",
+                                    "code": 200,
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "body": "{\n  \"user\": {\n    \"id\": \"3\",\n    \"username\": \"admin\",\n    \"email\": \"admin@example.com\",\n    \"account_type\": \"admin\"\n  },\n  \"access_token\": \"eyJhbGciOi...\"\n}"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Super Admin Login",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{baseUrl}}/api/auth/superadmin/login",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "auth",
+                                        "superadmin",
+                                        "login"
+                                    ]
+                                },
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"username\": \"superadmin\",\n  \"password\": \"password123\"\n}"
+                                },
+                                "description": "Logs in via the main Laravel site superadmin endpoint and returns a local landing JWT with account_type=superadmin. Save the token in superadminToken."
+                            },
+                            "response": [
+                                {
+                                    "name": "Success Example",
+                                    "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                            {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{baseUrl}}/api/auth/superadmin/login",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "api",
+                                                "auth",
+                                                "superadmin",
+                                                "login"
+                                            ]
+                                        },
+                                        "body": {
+                                            "mode": "raw",
+                                            "raw": "{\n  \"username\": \"superadmin\",\n  \"password\": \"password123\"\n}"
+                                        }
+                                    },
+                                    "status": "OK",
+                                    "code": 200,
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "body": "{\n  \"user\": {\n    \"username\": \"superadmin\",\n    \"account_type\": \"superadmin\"\n  },\n  \"access_token\": \"eyJhbGciOi...\"\n}"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "Admins",
+                    "item": [
+                        {
+                            "name": "Get Admins",
+                            "request": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{superadminToken}}"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{baseUrl}}/api/admin/admins",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "admin",
+                                        "admins"
+                                    ]
+                                },
+                                "description": "Lists the landing-page admins managed by the superadmin."
+                            },
+                            "response": [
+                                {
+                                    "name": "Success Example",
+                                    "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                            {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{superadminToken}}"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{baseUrl}}/api/admin/admins",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "api",
+                                                "admin",
+                                                "admins"
+                                            ]
+                                        }
+                                    },
+                                    "status": "OK",
+                                    "code": 200,
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "body": "[\n  {\n    \"id\": \"3\",\n    \"username\": \"landing-admin\",\n    \"full_name\": \"Landing Admin\",\n    \"email\": \"admin@example.com\",\n    \"phone_number\": \"+963900000001\"\n  }\n]"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Get Admin By Id",
+                            "request": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{superadminToken}}"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{baseUrl}}/api/admin/admins/3",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "admin",
+                                        "admins",
+                                        "3"
+                                    ]
+                                },
+                                "description": "Gets a single landing admin by id."
+                            },
+                            "response": [
+                                {
+                                    "name": "Success Example",
+                                    "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                            {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{superadminToken}}"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{baseUrl}}/api/admin/admins/3",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "api",
+                                                "admin",
+                                                "admins",
+                                                "3"
+                                            ]
+                                        }
+                                    },
+                                    "status": "OK",
+                                    "code": 200,
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "body": "{\n  \"id\": \"3\",\n  \"username\": \"landing-admin\",\n  \"full_name\": \"Landing Admin\",\n  \"email\": \"admin@example.com\",\n  \"phone_number\": \"+963900000001\"\n}"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Create Admin",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{superadminToken}}"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{baseUrl}}/api/admin/admins",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "admin",
+                                        "admins"
+                                    ]
+                                },
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"username\": \"landing-admin\",\n  \"email\": \"admin@example.com\",\n  \"phone_number\": \"+963900000001\",\n  \"password\": \"password123\",\n  \"full_name\": \"Landing Admin\",\n  \"address\": \"Damascus\"\n}"
+                                },
+                                "description": "Creates a landing-page admin account and assigns the admin role locally."
+                            },
+                            "response": [
+                                {
+                                    "name": "Created Example",
+                                    "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                            {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{superadminToken}}"
+                                            },
+                                            {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{baseUrl}}/api/admin/admins",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "api",
+                                                "admin",
+                                                "admins"
+                                            ]
+                                        },
+                                        "body": {
+                                            "mode": "raw",
+                                            "raw": "{\n  \"username\": \"landing-admin\",\n  \"email\": \"admin@example.com\",\n  \"phone_number\": \"+963900000001\",\n  \"password\": \"password123\",\n  \"full_name\": \"Landing Admin\",\n  \"address\": \"Damascus\"\n}"
+                                        }
+                                    },
+                                    "status": "Created",
+                                    "code": 201,
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "body": "{\n  \"id\": \"3\",\n  \"username\": \"landing-admin\",\n  \"email\": \"admin@example.com\",\n  \"phone_number\": \"+963900000001\",\n  \"full_name\": \"Landing Admin\"\n}"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Update Admin",
+                            "request": {
+                                "method": "PATCH",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{superadminToken}}"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{baseUrl}}/api/admin/admins/3",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "admin",
+                                        "admins",
+                                        "3"
+                                    ]
+                                },
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"username\": \"landing-admin-updated\",\n  \"email\": \"admin-updated@example.com\",\n  \"phone_number\": \"+963900000002\"\n}"
+                                },
+                                "description": "Updates a landing-page admin account."
+                            },
+                            "response": [
+                                {
+                                    "name": "Success Example",
+                                    "originalRequest": {
+                                        "method": "PATCH",
+                                        "header": [
+                                            {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{superadminToken}}"
+                                            },
+                                            {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{baseUrl}}/api/admin/admins/3",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "api",
+                                                "admin",
+                                                "admins",
+                                                "3"
+                                            ]
+                                        },
+                                        "body": {
+                                            "mode": "raw",
+                                            "raw": "{\n  \"username\": \"landing-admin-updated\",\n  \"email\": \"admin-updated@example.com\",\n  \"phone_number\": \"+963900000002\"\n}"
+                                        }
+                                    },
+                                    "status": "OK",
+                                    "code": 200,
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "body": "{\n  \"id\": \"3\",\n  \"username\": \"landing-admin-updated\",\n  \"email\": \"admin-updated@example.com\",\n  \"phone_number\": \"+963900000002\"\n}"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Delete Admin",
+                            "request": {
+                                "method": "DELETE",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{superadminToken}}"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{baseUrl}}/api/admin/admins/3",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "admin",
+                                        "admins",
+                                        "3"
+                                    ]
+                                },
+                                "description": "Deletes a landing-page admin account."
+                            },
+                            "response": [
+                                {
+                                    "name": "Success Example",
+                                    "originalRequest": {
+                                        "method": "DELETE",
+                                        "header": [
+                                            {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{superadminToken}}"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{baseUrl}}/api/admin/admins/3",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "api",
+                                                "admin",
+                                                "admins",
+                                                "3"
+                                            ]
+                                        }
+                                    },
+                                    "status": "OK",
+                                    "code": 200,
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "body": "{\n  \"success\": true\n}"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "News",
+                    "item": [
+                        {
+                            "name": "Get News",
+                            "request": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{baseUrl}}/api/news",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "news"
+                                    ]
+                                },
+                                "description": "Returns active news items without requiring a token."
+                            },
+                            "response": [
+                                {
+                                    "name": "Success Example",
+                                    "originalRequest": {
+                                        "method": "GET",
+                                        "url": {
+                                            "raw": "{{baseUrl}}/api/news",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "api",
+                                                "news"
+                                            ]
+                                        }
+                                    },
+                                    "status": "OK",
+                                    "code": 200,
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "body": "[\n  {\n    \"id\": \"1\",\n    \"title\": \"افتتاح مشروع جديد\",\n    \"slug\": \"opening-new-project\",\n    \"excerpt\": \"نبذة قصيرة عن الخبر\",\n    \"content\": \"محتوى الخبر الكامل\",\n    \"image_url\": \"https://example.com/news/1.jpg\",\n    \"is_active\": true,\n    \"published_at\": \"2026-05-23T12:00:00.000Z\"\n  }\n]"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Get News By Id",
+                            "request": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{baseUrl}}/api/news/show/1",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "news",
+                                        "show",
+                                        "1"
+                                    ]
+                                },
+                                "description": "Returns a single active news item without requiring a token."
+                            },
+                            "response": [
+                                {
+                                    "name": "Success Example",
+                                    "originalRequest": {
+                                        "method": "GET",
+                                        "url": {
+                                            "raw": "{{baseUrl}}/api/news/show/1",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "api",
+                                                "news",
+                                                "show",
+                                                "1"
+                                            ]
+                                        }
+                                    },
+                                    "status": "OK",
+                                    "code": 200,
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "body": "{\n  \"id\": \"1\",\n  \"title\": \"افتتاح مشروع جديد\",\n  \"slug\": \"opening-new-project\",\n  \"excerpt\": \"نبذة قصيرة عن الخبر\",\n  \"content\": \"محتوى الخبر الكامل\",\n  \"image_url\": \"https://example.com/news/1.jpg\",\n  \"is_active\": true,\n  \"published_at\": \"2026-05-23T12:00:00.000Z\"\n}"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "Best Customers",
+                    "item": [
+                        {
+                            "name": "Get All Customers",
+                            "request": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{adminToken}}"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{baseUrl}}/api/admin/customers",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "admin",
+                                        "customers"
+                                    ]
+                                },
+                                "description": "Returns all customers from the database. Admin and superadmin only."
+                            },
+                            "response": [
+                                {
+                                    "name": "Success Example",
+                                    "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                            {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{adminToken}}"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{baseUrl}}/api/admin/customers",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "api",
+                                                "admin",
+                                                "customers"
+                                            ]
+                                        }
+                                    },
+                                    "status": "OK",
+                                    "code": 200,
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "body": "[\n  {\n    \"id\": \"12\",\n    \"full_name\": \"Customer Name\",\n    \"company_name\": \"Customer Company\",\n    \"phone_number\": \"+963900000000\",\n    \"email\": \"customer@example.com\",\n    \"address\": \"Damascus\",\n    \"license_image\": \"http://192.168.1.222:8000/storage/1822/Screenshot_1.png\",\n    \"status\": \"0\",\n    \"is_best_customer\": false,\n    \"best_customer_order\": 0,\n    \"media\": [\n      {\n        \"id\": \"1822\",\n        \"model_type\": \"App\\Models\\Customer\",\n        \"model_id\": \"12\",\n        \"uuid\": \"0a546851-694a-42e9-a225-1ca8d0c26c45\",\n        \"collection_name\": \"license_images\",\n        \"name\": \"Screenshot_1\",\n        \"file_name\": \"Screenshot_1.png\",\n        \"mime_type\": \"image/png\",\n        \"disk\": \"public\",\n        \"conversions_disk\": \"public\",\n        \"size\": \"7123\",\n        \"manipulations\": [],\n        \"custom_properties\": [],\n        \"generated_conversions\": [],\n        \"responsive_images\": [],\n        \"order_column\": 1,\n        \"original_url\": \"http://192.168.1.222:8000/storage/1822/Screenshot_1.png\",\n        \"preview_url\": \"\"\n      }\n    ]\n  }\n]"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Get Best Customers",
+                            "request": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{adminToken}}"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{baseUrl}}/api/admin/customers/best",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "admin",
+                                        "customers",
+                                        "best"
+                                    ]
+                                },
+                                "description": "Returns customers marked as best customers."
+                            },
+                            "response": [
+                                {
+                                    "name": "Success Example",
+                                    "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                            {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{adminToken}}"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{baseUrl}}/api/admin/customers/best",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "api",
+                                                "admin",
+                                                "customers",
+                                                "best"
+                                            ]
+                                        }
+                                    },
+                                    "status": "OK",
+                                    "code": 200,
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "body": "[\n  {\n    \"id\": \"12\",\n    \"full_name\": \"Customer Name\",\n    \"company_name\": \"Customer Company\",\n    \"license_image\": \"http://192.168.1.222:8000/storage/1822/Screenshot_1.png\",\n    \"is_best_customer\": true,\n    \"best_customer_order\": 1,\n    \"media\": [\n      {\n        \"id\": \"1822\",\n        \"model_type\": \"App\\Models\\Customer\",\n        \"model_id\": \"12\",\n        \"uuid\": \"0a546851-694a-42e9-a225-1ca8d0c26c45\",\n        \"collection_name\": \"license_images\",\n        \"name\": \"Screenshot_1\",\n        \"file_name\": \"Screenshot_1.png\",\n        \"mime_type\": \"image/png\",\n        \"disk\": \"public\",\n        \"conversions_disk\": \"public\",\n        \"size\": \"7123\",\n        \"manipulations\": [],\n        \"custom_properties\": [],\n        \"generated_conversions\": [],\n        \"responsive_images\": [],\n        \"order_column\": 1,\n        \"original_url\": \"http://192.168.1.222:8000/storage/1822/Screenshot_1.png\",\n        \"preview_url\": \"\"\n      }\n    ]\n  }\n]"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Update Best Customer",
+                            "request": {
+                                "method": "PATCH",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{adminToken}}"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{baseUrl}}/api/admin/customers/12/best",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "admin",
+                                        "customers",
+                                        "12",
+                                        "best"
+                                    ]
+                                },
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"is_best_customer\": true,\n  \"best_customer_order\": 1\n}"
+                                },
+                                "description": "Marks a customer as best customer and controls its display order."
+                            },
+                            "response": [
+                                {
+                                    "name": "Success Example",
+                                    "originalRequest": {
+                                        "method": "PATCH",
+                                        "header": [
+                                            {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{adminToken}}"
+                                            },
+                                            {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{baseUrl}}/api/admin/customers/12/best",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "api",
+                                                "admin",
+                                                "customers",
+                                                "12",
+                                                "best"
+                                            ]
+                                        },
+                                        "body": {
+                                            "mode": "raw",
+                                            "raw": "{\n  \"is_best_customer\": true,\n  \"best_customer_order\": 1\n}"
+                                        }
+                                    },
+                                    "status": "OK",
+                                    "code": 200,
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "body": "{\n  \"id\": \"12\",\n  \"full_name\": \"Customer Name\",\n  \"is_best_customer\": true,\n  \"best_customer_order\": 1\n}"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "Landing Templates",
+                    "item": [
+                        {
+                            "name": "Get Landing Templates",
+                            "request": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{adminToken}}"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{baseUrl}}/api/admin/templates",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "admin",
+                                        "templates"
+                                    ]
+                                },
+                                "description": "Lists templates with base prices and landing prices for admin management."
+                            },
+                            "response": [
+                                {
+                                    "name": "Success Example",
+                                    "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                            {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{adminToken}}"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{baseUrl}}/api/admin/templates",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "api",
+                                                "admin",
+                                                "templates"
+                                            ]
+                                        }
+                                    },
+                                    "status": "OK",
+                                    "code": 200,
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "body": "[\n  {\n    \"id\": \"5\",\n    \"model\": \"Standard\",\n    \"type\": \"Billboard\",\n    \"price\": 1000,\n    \"landing_price\": 900,\n    \"base_prices\": [\n      {\n        \"type\": 1,\n        \"price\": 1200\n      }\n    ]\n  }\n]"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Update Landing Template Price",
+                            "request": {
+                                "method": "PATCH",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{adminToken}}"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{baseUrl}}/api/admin/templates/5/landing-price",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "admin",
+                                        "templates",
+                                        "5",
+                                        "landing-price"
+                                    ]
+                                },
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"landing_price\": 850\n}"
+                                },
+                                "description": "Updates the landing page price for a template without changing the base product prices."
+                            },
+                            "response": [
+                                {
+                                    "name": "Success Example",
+                                    "originalRequest": {
+                                        "method": "PATCH",
+                                        "header": [
+                                            {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{adminToken}}"
+                                            },
+                                            {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{baseUrl}}/api/admin/templates/5/landing-price",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "api",
+                                                "admin",
+                                                "templates",
+                                                "5",
+                                                "landing-price"
+                                            ]
+                                        },
+                                        "body": {
+                                            "mode": "raw",
+                                            "raw": "{\n  \"landing_price\": 850\n}"
+                                        }
+                                    },
+                                    "status": "OK",
+                                    "code": 200,
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "body": "{\n  \"id\": \"5\",\n  \"model\": \"Standard\",\n  \"landing_price\": 850,\n  \"base_prices\": [\n    {\n      \"type\": 1,\n      \"price\": 1200\n    }\n  ]\n}"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "News Management",
+                    "item": [
+                        {
+                            "name": "Get Admin News",
+                            "request": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{adminToken}}"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{baseUrl}}/api/news/admin",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "news",
+                                        "admin"
+                                    ]
+                                },
+                                "description": "Lists all news items for admin and superadmin."
+                            },
+                            "response": [
+                                {
+                                    "name": "Success Example",
+                                    "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                            {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{adminToken}}"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{baseUrl}}/api/news/admin",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "api",
+                                                "news",
+                                                "admin"
+                                            ]
+                                        }
+                                    },
+                                    "status": "OK",
+                                    "code": 200,
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "body": "[\n  {\n    \"id\": \"1\",\n    \"title\": \"افتتاح مشروع جديد\",\n    \"slug\": \"opening-new-project\",\n    \"excerpt\": \"نبذة قصيرة عن الخبر\",\n    \"content\": \"محتوى الخبر الكامل\",\n    \"image_url\": \"https://example.com/news/1.jpg\",\n    \"is_active\": true,\n    \"published_at\": \"2026-05-23T12:00:00.000Z\"\n  }\n]"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Create News",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{adminToken}}"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{baseUrl}}/api/news/admin",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "news",
+                                        "admin"
+                                    ]
+                                },
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"title\": \"افتتاح مشروع جديد\",\n  \"slug\": \"opening-new-project\",\n  \"excerpt\": \"نبذة قصيرة عن الخبر\",\n  \"content\": \"محتوى الخبر الكامل\",\n  \"image_url\": \"https://example.com/news/1.jpg\",\n  \"is_active\": true,\n  \"published_at\": \"2026-05-23T12:00:00.000Z\"\n}"
+                                },
+                                "description": "Creates a news item for the landing page."
+                            },
+                            "response": [
+                                {
+                                    "name": "Created Example",
+                                    "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                            {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{adminToken}}"
+                                            },
+                                            {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{baseUrl}}/api/news/admin",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "api",
+                                                "news",
+                                                "admin"
+                                            ]
+                                        }
+                                    },
+                                    "status": "Created",
+                                    "code": 201,
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "body": "{\n  \"id\": \"1\",\n  \"title\": \"افتتاح مشروع جديد\",\n  \"slug\": \"opening-new-project\",\n  \"excerpt\": \"نبذة قصيرة عن الخبر\",\n  \"content\": \"محتوى الخبر الكامل\",\n  \"image_url\": \"https://example.com/news/1.jpg\",\n  \"is_active\": true,\n  \"published_at\": \"2026-05-23T12:00:00.000Z\"\n}"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Update News",
+                            "request": {
+                                "method": "PATCH",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{adminToken}}"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{baseUrl}}/api/news/admin/1",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "news",
+                                        "admin",
+                                        "1"
+                                    ]
+                                },
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"title\": \"خبر محدث\",\n  \"content\": \"المحتوى المحدث\"\n}"
+                                },
+                                "description": "Updates an existing news item."
+                            },
+                            "response": [
+                                {
+                                    "name": "Success Example",
+                                    "originalRequest": {
+                                        "method": "PATCH",
+                                        "header": [
+                                            {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{adminToken}}"
+                                            },
+                                            {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{baseUrl}}/api/news/admin/1",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "api",
+                                                "news",
+                                                "admin",
+                                                "1"
+                                            ]
+                                        }
+                                    },
+                                    "status": "OK",
+                                    "code": 200,
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "body": "{\n  \"id\": \"1\",\n  \"title\": \"خبر محدث\",\n  \"slug\": \"opening-new-project\",\n  \"excerpt\": \"نبذة قصيرة عن الخبر\",\n  \"content\": \"المحتوى المحدث\",\n  \"image_url\": \"https://example.com/news/1.jpg\",\n  \"is_active\": true,\n  \"published_at\": \"2026-05-23T12:00:00.000Z\"\n}"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Activate News",
+                            "request": {
+                                "method": "PATCH",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{adminToken}}"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{baseUrl}}/api/news/admin/1/activate",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "news",
+                                        "admin",
+                                        "1",
+                                        "activate"
+                                    ]
+                                },
+                                "description": "Makes a news item public."
+                            },
+                            "response": [
+                                {
+                                    "name": "Success Example",
+                                    "originalRequest": {
+                                        "method": "PATCH",
+                                        "header": [
+                                            {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{adminToken}}"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{baseUrl}}/api/news/admin/1/activate",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "api",
+                                                "news",
+                                                "admin",
+                                                "1",
+                                                "activate"
+                                            ]
+                                        }
+                                    },
+                                    "status": "OK",
+                                    "code": 200,
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "body": "{\n  \"id\": \"1\",\n  \"title\": \"افتتاح مشروع جديد\",\n  \"is_active\": true\n}"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Deactivate News",
+                            "request": {
+                                "method": "PATCH",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{adminToken}}"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{baseUrl}}/api/news/admin/1/deactivate",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "news",
+                                        "admin",
+                                        "1",
+                                        "deactivate"
+                                    ]
+                                },
+                                "description": "Hides a news item from the public landing page."
+                            },
+                            "response": [
+                                {
+                                    "name": "Success Example",
+                                    "originalRequest": {
+                                        "method": "PATCH",
+                                        "header": [
+                                            {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{adminToken}}"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{baseUrl}}/api/news/admin/1/deactivate",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "api",
+                                                "news",
+                                                "admin",
+                                                "1",
+                                                "deactivate"
+                                            ]
+                                        }
+                                    },
+                                    "status": "OK",
+                                    "code": 200,
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "body": "{\n  \"id\": \"1\",\n  \"title\": \"افتتاح مشروع جديد\",\n  \"is_active\": false\n}"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Delete News",
+                            "request": {
+                                "method": "DELETE",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{adminToken}}"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{baseUrl}}/api/news/admin/1",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "news",
+                                        "admin",
+                                        "1"
+                                    ]
+                                },
+                                "description": "Deletes a news item."
+                            },
+                            "response": [
+                                {
+                                    "name": "Success Example",
+                                    "originalRequest": {
+                                        "method": "DELETE",
+                                        "header": [
+                                            {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{adminToken}}"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{baseUrl}}/api/news/admin/1",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "api",
+                                                "news",
+                                                "admin",
+                                                "1"
+                                            ]
+                                        }
+                                    },
+                                    "status": "OK",
+                                    "code": 200,
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "body": "{\n  \"success\": true\n}"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "Chat",
+                    "item": [
+                        {
+                            "name": "List All Conversations",
+                            "request": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{adminToken}}"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{baseUrl}}/api/chat/conversations?page=1&limit=20&status=open",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "chat",
+                                        "conversations"
+                                    ],
+                                    "query": [
+                                        {
+                                            "key": "page",
+                                            "value": "1"
+                                        },
+                                        {
+                                            "key": "limit",
+                                            "value": "20"
+                                        },
+                                        {
+                                            "key": "status",
+                                            "value": "open"
+                                        }
+                                    ]
+                                },
+                                "description": "Returns all conversations visible to the authenticated admin."
+                            },
+                            "response": [
+                                {
+                                    "name": "Success Example",
+                                    "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                            {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{adminToken}}"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{baseUrl}}/api/chat/conversations?page=1&limit=20&status=open",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "api",
+                                                "chat",
+                                                "conversations"
+                                            ]
+                                        }
+                                    },
+                                    "status": "OK",
+                                    "code": 200,
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "body": "[\n  {\n    \"id\": \"15\",\n    \"customer_id\": \"12\",\n    \"status\": \"open\"\n  }\n]"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Create Or Reuse Conversation For Customer",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{adminToken}}"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{baseUrl}}/api/chat/conversations",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "chat",
+                                        "conversations"
+                                    ]
+                                },
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"customer_id\": \"12\"\n}"
+                                },
+                                "description": "Creates or reuses an open conversation for a specific customer."
+                            },
+                            "response": [
+                                {
+                                    "name": "Created Example",
+                                    "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                            {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{adminToken}}"
+                                            },
+                                            {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{baseUrl}}/api/chat/conversations",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "api",
+                                                "chat",
+                                                "conversations"
+                                            ]
+                                        }
+                                    },
+                                    "status": "Created",
+                                    "code": 201,
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "body": "{\n  \"id\": \"15\",\n  \"customer_id\": \"12\",\n  \"status\": \"open\"\n}"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "List Messages",
+                            "request": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{adminToken}}"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{baseUrl}}/api/chat/conversations/15/messages?page=1&limit=50",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "chat",
+                                        "conversations",
+                                        "15",
+                                        "messages"
+                                    ],
+                                    "query": [
+                                        {
+                                            "key": "page",
+                                            "value": "1"
+                                        },
+                                        {
+                                            "key": "limit",
+                                            "value": "50"
+                                        }
+                                    ]
+                                },
+                                "description": "Returns messages for a conversation visible to the authenticated admin."
+                            },
+                            "response": [
+                                {
+                                    "name": "Success Example",
+                                    "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                            {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{adminToken}}"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{baseUrl}}/api/chat/conversations/15/messages?page=1&limit=50",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "api",
+                                                "chat",
+                                                "conversations",
+                                                "15",
+                                                "messages"
+                                            ]
+                                        }
+                                    },
+                                    "status": "OK",
+                                    "code": 200,
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "body": "{\n  \"conversation\": {\n    \"id\": \"15\",\n    \"status\": \"open\"\n  },\n  \"items\": [\n    {\n      \"id\": \"44\",\n      \"content\": \"Hello\"\n    }\n  ],\n  \"pagination\": {\n    \"page\": 1,\n    \"limit\": 50\n  }\n}"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Send Message",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{adminToken}}"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{baseUrl}}/api/chat/conversations/15/messages",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "chat",
+                                        "conversations",
+                                        "15",
+                                        "messages"
+                                    ]
+                                },
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"content\": \"تم استلام طلبك وسنرد قريبًا\"\n}"
+                                },
+                                "description": "Sends a message in an existing conversation. Use customer_id with the socket event when you want the server to open or reuse a conversation for that customer."
+                            },
+                            "response": [
+                                {
+                                    "name": "Created Example",
+                                    "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                            {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{adminToken}}"
+                                            },
+                                            {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{baseUrl}}/api/chat/conversations/15/messages",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "api",
+                                                "chat",
+                                                "conversations",
+                                                "15",
+                                                "messages"
+                                            ]
+                                        }
+                                    },
+                                    "status": "Created",
+                                    "code": 201,
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "body": "{\n  \"conversation\": {\n    \"id\": \"15\",\n    \"status\": \"open\"\n  },\n  \"message\": {\n    \"id\": \"45\",\n    \"content\": \"تم استلام طلبك وسنرد قريبًا\"\n  }\n}"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "variable": [
+        {
+            "key": "baseUrl",
+            "value": "http://localhost:3000"
+        },
+        {
+            "key": "customerToken",
+            "value": ""
+        },
+        {
+            "key": "adminToken",
+            "value": ""
+        },
+        {
+            "key": "superadminToken",
+            "value": ""
+        }
+    ]
+}
