@@ -4,6 +4,7 @@ import OpenAI from 'openai';
 import { AiDataService } from './ai.gateway';
 import { getAiConfig } from './ai.config';
 import { AiSession, ChatClient, runAgent } from './ai.agent';
+import { AiLogService } from './ai.log';
 
 const SESSION_TTL_MS = 60 * 60 * 1000;
 const RATE_LIMIT = 20; // messages per minute per session
@@ -17,7 +18,7 @@ export class AiService implements OnModuleDestroy {
     private hits = new Map<string, number[]>();
     private sweeper = setInterval(() => this.sweep(), 5 * 60 * 1000);
 
-    constructor(private readonly data: AiDataService) {
+    constructor(private readonly data: AiDataService, private readonly log: AiLogService) {
         this.sweeper.unref();
     }
 
@@ -56,7 +57,7 @@ export class AiService implements OnModuleDestroy {
 
         let session = this.sessions.get(sid);
         if (!session) {
-            session = { t: Date.now(), messages: [], ctx: { known: new Map(), shown: [], period: null } };
+            session = { t: Date.now(), messages: [], ctx: { known: new Map(), shown: [], period: null, lead: {} } };
             this.sessions.set(sid, session);
         }
         session.t = Date.now();
@@ -71,9 +72,17 @@ export class AiService implements OnModuleDestroy {
                 today: new Date().toISOString().slice(0, 10),
             });
             if (process.env.AI_DEBUG_TRACE) this.logger.log(JSON.stringify(out.trace));
+            // Fire-and-forget: the admin log must never slow down or break the chat.
+            void this.log.record(sid, message.trim(), out.reply, session.ctx.lead);
             return { session_id: sid, reply: out.reply, signs: out.signs, period: out.period };
         } catch (e: any) {
             this.logger.error(`chat failed: ${e?.message}`);
+            if (process.env.AI_DEBUG_ERRORS) {
+                throw new HttpException(
+                    { statusCode: 502, message: 'agent_failed', detail: e?.message ?? String(e), status: e?.status ?? e?.response?.status },
+                    HttpStatus.BAD_GATEWAY,
+                );
+            }
             throw new HttpException('agent_failed', HttpStatus.BAD_GATEWAY);
         }
     }

@@ -64,6 +64,8 @@ export interface AgentContext {
     known: Map<number, any>;
     shown: { id: number; price: number | null }[];
     period: { start_date: string; end_date: string } | null;
+    /** What the customer told Salma about themselves (saved via save_lead, shown to admins). */
+    lead?: Record<string, string>;
 }
 
 export function createTools(deps: { cfg: AiConfig; data: AiGateway; ctx: AgentContext }) {
@@ -188,6 +190,17 @@ export function createTools(deps: { cfg: AiConfig; data: AiGateway; ctx: AgentCo
             return Object.keys(out).length ? out : { none: true, message: 'no alternatives found for these filters' };
         },
 
+        // Remember who the customer is (name, company, business, goal...). Visible to admins.
+        async save_lead(args: any) {
+            const keys = ['name', 'company', 'business_type', 'business_details', 'target_audience', 'campaign_goal', 'budget', 'city', 'dates', 'phone', 'notes'];
+            const lead = (ctx.lead ||= {});
+            for (const k of keys) {
+                const v = args?.[k];
+                if (typeof v === 'string' && v.trim()) lead[k] = v.trim().slice(0, 500);
+            }
+            return { saved: true, lead };
+        },
+
         // Cards shown in the UI. Prices come from the official calculator, one call per card.
         async present_signs({ sign_ids, start_date, end_date }) {
             const ids = [...new Set(((sign_ids as any[]) || []).map(Number))].filter((id) => ctx.known.has(id)).slice(0, 4);
@@ -231,6 +244,15 @@ export function createTools(deps: { cfg: AiConfig; data: AiGateway; ctx: AgentCo
             'بدائل حقيقية ومسعّرة عندما لا يناسب الزبون الخيار الحالي (غالي، لم يعجبه، لا نتائج): قالب آخر، منطقة أخرى، أو تواريخ قريبة. استدعِها بدل الاعتذار.',
             { city_id: int, start_date: str, end_date: str, region_id: int, template_id: int, max_price: { type: 'number', description: 'ميزانية الزبون إن ذكرها' } },
             ['city_id', 'start_date', 'end_date'],
+        ),
+        fn(
+            'save_lead',
+            'احفظي معلومات الزبون كلما عرفتِ شيئاً جديداً عنه (الاسم، الشركة، نوع النشاط، تفاصيل مهمة، الجمهور، الغاية، الميزانية...). استدعيها بصمت دون أن تذكري ذلك للزبون. أرسلي فقط الحقول التي عرفتِها.',
+            {
+                name: str, company: str, business_type: str, business_details: str, target_audience: str,
+                campaign_goal: { ...str, description: 'branding | marketing | launch | event | retention | other' },
+                budget: str, city: str, dates: str, phone: str, notes: str,
+            },
         ),
         fn(
             'present_signs',

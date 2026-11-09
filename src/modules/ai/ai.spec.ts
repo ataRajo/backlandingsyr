@@ -38,7 +38,7 @@ const fake = (): AiGateway & { calls: any[] } => {
     };
 };
 
-const cfg: AiConfig = { companyName: 'X', agentName: 'سلمى', currency: 'USD', productType: 1, printingId: 2, model: 'm', notes: '' };
+const cfg: AiConfig = { companyName: 'X', agentName: 'سلمى', currency: 'USD', productType: 1, printingId: 2, model: 'm', notes: '', contacts: { damascus: '1', aleppo: '2' } };
 const mkCtx = () => ({ known: new Map<number, any>(), shown: [], period: null });
 
 describe('AI employee tools', () => {
