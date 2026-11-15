@@ -70,7 +70,7 @@ export class AiDataService implements AiGateway {
     }
 
     async calculate(payload: any) {
-        const url = process.env.AI_CALC_URL || 'https://tsyrback.addresses.sy/api/get-calculate-Amount';
+        const url = process.env.AI_CALC_URL || 'https://devsyrback.addresses.sy/api/get-calculate-Amount';
         const res = await firstValueFrom(this.http.post(url, payload, { timeout: TIMEOUT_MS }));
         return res.data;
     }

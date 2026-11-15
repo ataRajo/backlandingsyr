@@ -1,5 +1,6 @@
 import { AiGateway } from './ai.gateway';
 import { AiConfig } from './ai.config';
+import { matchRegions } from './ai.match';
 
 // Tools the model can call. Everything returned to the model comes from the company's
 // real data. The model never touches the database directly.
@@ -66,6 +67,8 @@ export interface AgentContext {
     period: { start_date: string; end_date: string } | null;
     /** What the customer told Salma about themselves (saved via save_lead, shown to admins). */
     lead?: Record<string, string>;
+    /** Sign ids that genuinely match what the customer asked for (last search). Only these may become cards. */
+    presentable?: Set<number>;
 }
 
 export function createTools(deps: { cfg: AiConfig; data: AiGateway; ctx: AgentContext }) {
@@ -114,9 +117,30 @@ export function createTools(deps: { cfg: AiConfig; data: AiGateway; ctx: AgentCo
                 .map((r: any) => ({ id: r.id, name: r.name }));
         },
 
+        // Fuzzy region lookup (typos / spelling variants). Never guess: the model must ask when not confident.
+        async find_region({ name, city_id }) {
+            const regions = await data.regions();
+            const r = matchRegions(name, regions, city_id);
+            if (!r.matches.length && city_id) {
+                // maybe the area belongs to another city
+                const other = matchRegions(name, regions);
+                if (other.matches.length) return { found: false, in_other_city: other.matches };
+            }
+            return r.matches.length ? { found: true, confident: r.confident, matches: r.matches } : { found: false };
+        },
+
         async search_signs({ city_id, start_date, end_date, region_id, template_id }) {
             const all = await data.roadsigns({ city_id, start_date, end_date, region_id, template_id });
             remember(all);
+            // Only free signs that really match the requested filters may be shown as cards.
+            // An empty result stays empty: nothing is substituted.
+            ctx.presentable = new Set(
+                all
+                    .filter((s) => signStatus(s) === 'free')
+                    .filter((s) => !region_id || Number(s.region_id) === Number(region_id))
+                    .filter((s) => !template_id || Number(s.template_id) === Number(template_id))
+                    .map((s) => Number(s.id)),
+            );
             const order = { free: 0, partial: 1, booked: 2 };
             const sorted = [...all].sort((a, b) => order[signStatus(a)] - order[signStatus(b)]);
             return {
@@ -187,6 +211,12 @@ export function createTools(deps: { cfg: AiConfig; data: AiGateway; ctx: AgentCo
             }
             if (partial.length) out.partially_free_here = partial.slice(0, 3).map(compactSign);
 
+            // Alternatives are shown only because the customer asked for them (see prompt).
+            const presentable = (ctx.presentable ||= new Set());
+            Object.values(out).forEach((g: any) =>
+                (Array.isArray(g) ? g : g.examples || []).forEach((s: any) => presentable.add(Number(s.id))),
+            );
+
             return Object.keys(out).length ? out : { none: true, message: 'no alternatives found for these filters' };
         },
 
@@ -203,7 +233,7 @@ export function createTools(deps: { cfg: AiConfig; data: AiGateway; ctx: AgentCo
 
         // Cards shown in the UI. Prices come from the official calculator, one call per card.
         async present_signs({ sign_ids, start_date, end_date }) {
-            const ids = [...new Set(((sign_ids as any[]) || []).map(Number))].filter((id) => ctx.known.has(id)).slice(0, 4);
+            const ids = [...new Set(((sign_ids as any[]) || []).map(Number))].filter((id) => ctx.known.has(id) && ctx.presentable?.has(id)).slice(0, 4);
             const items = await Promise.all(
                 ids.map(async (id) => {
                     const p = await priceOf([ctx.known.get(id)], start_date, end_date).catch(() => null);
@@ -228,6 +258,12 @@ export function createTools(deps: { cfg: AiConfig; data: AiGateway; ctx: AgentCo
         fn('list_printings', 'أنواع الطباعة وأسعارها (فلكس عاكس، فلكس عادي، طباعة خارجية). الافتراضي فلكس عادي؛ اذكري الخيارات فقط إذا سأل الزبون عن الطباعة.', {}),
         fn('list_regions', 'مناطق مدينة معينة مع ids. لتحويل اسم منطقة إلى region_id.', { city_id: int }, ['city_id']),
         fn(
+            'find_region',
+            'ابحثي عن منطقة باسم كتبه الزبون (تتحمل الأخطاء الإملائية واللهجة: جميلية/جمايلية/جمالية). استخدميها دائماً لتحويل اسم المنطقة إلى region_id بدل التخمين. إن كانت النتيجة confident=false أو وُجد أكثر من احتمال، اسألي الزبون "تقصد كذا؟" ولا تبحثي بتخمين.',
+            { name: str, city_id: int },
+            ['name'],
+        ),
+        fn(
             'search_signs',
             'ابحث عن لوحات متاحة في مدينة ضمن فترة. region_id و template_id اختياريان.',
             { city_id: int, start_date: { ...str, description: 'YYYY-MM-DD' }, end_date: { ...str, description: 'YYYY-MM-DD' }, region_id: int, template_id: int },
@@ -241,7 +277,7 @@ export function createTools(deps: { cfg: AiConfig; data: AiGateway; ctx: AgentCo
         ),
         fn(
             'suggest_alternatives',
-            'بدائل حقيقية ومسعّرة عندما لا يناسب الزبون الخيار الحالي (غالي، لم يعجبه، لا نتائج): قالب آخر، منطقة أخرى، أو تواريخ قريبة. استدعِها بدل الاعتذار.',
+            'بدائل حقيقية ومسعّرة عندما يطلب الزبون صراحةً بدائل أو يقول غالي/لم يعجبني: قالب آخر، منطقة أخرى، أو تواريخ قريبة. لا تستدعِها تلقائياً عند غياب النتائج.',
             { city_id: int, start_date: str, end_date: str, region_id: int, template_id: int, max_price: { type: 'number', description: 'ميزانية الزبون إن ذكرها' } },
             ['city_id', 'start_date', 'end_date'],
         ),

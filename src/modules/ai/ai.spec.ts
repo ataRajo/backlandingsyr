@@ -71,6 +71,32 @@ describe('AI employee tools', () => {
         expect(cheap.other_template_same_region).toBeUndefined();
     });
 
+    it('present_signs shows nothing when the search had no matching results', async () => {
+        const ctx = mkCtx();
+        const t = createTools({ cfg, data: fake(), ctx });
+        await t.impl.search_signs({ city_id: 12, start_date: '2026-11-03', end_date: '2026-12-04' }); // known signs exist
+        const none = await t.impl.search_signs({ city_id: 12, start_date: '2026-11-03', end_date: '2026-12-04', region_id: 999 });
+        expect(none.total).toBe(0);
+        const r = await t.impl.present_signs({ sign_ids: [1813, 1785], start_date: '2026-11-03', end_date: '2026-12-04' });
+        expect(r.displayed).toBe(0);
+    });
+
+    it('find_region tolerates spelling variants and does not guess', async () => {
+        const data = fake();
+        data.regions = async () => [
+            { id: 1, name: 'الجميلية', city_id: 11 }, { id: 2, name: 'العزيزية', city_id: 11 },
+            { id: 3, name: 'المزة', city_id: 12 }, { id: 4, name: 'المالكي', city_id: 12 },
+        ];
+        const t = createTools({ cfg, data, ctx: mkCtx() });
+        for (const q of ['جميلية', 'جمايلية', 'جمالية', 'بالجميلية', 'حي الجميليه']) {
+            const r = await t.impl.find_region({ name: q, city_id: 11 });
+            expect(r.matches[0].id).toBe(1);
+            expect(r.confident).toBe(true);
+        }
+        expect((await t.impl.find_region({ name: 'xyz بلا', city_id: 11 })).found).toBe(false);
+        expect((await t.impl.find_region({ name: 'المزة', city_id: 11 })).in_other_city[0].id).toBe(3);
+    });
+
     it('status helper', () => {
         expect(signStatus({ is_booked: false })).toBe('free');
         expect(signStatus({ is_booked: true, available_date_ranges: [] })).toBe('booked');
